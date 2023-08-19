@@ -10,25 +10,33 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Column 1</th>
-                                <th scope="col">Column 2</th>
-                                <th scope="col">Column 3</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
-                                <td scope="row">R1C1</td>
-                                <td>R1C2</td>
-                                <td>R1C3</td>
-                            </tr>
-                            <tr class="">
-                                <td scope="row">Item</td>
-                                <td>Item</td>
-                                <td>Item</td>
-                            </tr>
+                            @foreach($employees as $employee)
+                                <tr class="">
+                                    <td>{{$employee->id}}</td>
+                                    <td scope="row">{{$employee->name}}</td>
+                                    <td>{{$employee->email}}</td>
+                                    <td>{{$employee->phone}}</td>
+                                    <td>{{$employee->address}}</td>
+                                    <td>
+
+                                        <a href="{{url('employee/edit/'.$employee->id)}}" class="btn btn-info">Edit</a>
+                                        <a href="{{url('employee/delete/'.$employee->id)}}" class="btn btn-danger">Delete</a>
+                                        
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
