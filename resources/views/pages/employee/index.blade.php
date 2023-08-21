@@ -9,6 +9,19 @@
                 <h2>Employee List</h2>
             </div>
             <div class="card-body">
+
+                @if(session()->get('success'))
+                    <p class="alert alert-success">{!!session()->get('success')!!}</p>
+                @endif
+
+                @if(session()->get('info'))
+                    <p class="alert alert-info">{!!session()->get('info')!!}</p>
+                @endif
+
+                @if(session()->get('danger'))
+                    <p class="alert alert-danger">{!!session()->get('danger')!!}</p>
+                @endif
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>

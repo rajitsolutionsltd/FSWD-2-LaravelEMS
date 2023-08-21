@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function index(){
         $employees = Employee::all();
+
         return view('pages.employee.index', \compact('employees'));
     }
 
@@ -17,6 +18,12 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:11'
+        ]);
+
         $name=  $request->name;
         $email = $request->email;
         $phone = $request->phone;
@@ -29,7 +36,7 @@ class EmployeeController extends Controller
         $employee->address = $address;
         $employee->save();
 
-        return redirect()->to('employee/index');
+        return redirect()->to('employee/index')->with('success', 'Employee is created successfully');;
 
 
     }
@@ -43,6 +50,13 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required|max:255|regex:/^[A-Z a-z]+$/',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits:11'
+        ]);
+
         $id = $request->id;
         $name=  $request->name;
         $email = $request->email;
@@ -56,7 +70,7 @@ class EmployeeController extends Controller
         $employee->address = $address;
         $employee->save();
 
-        return redirect()->to('employee/index');
+        return redirect()->to('employee/index')->with('info', 'Employee is updated successful for *<b>'.$employee->name."</b>");
 
     }
 
@@ -64,6 +78,6 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $employee->delete();
 
-        return redirect()->to('employee/index');
+        return redirect()->to('employee/index')->with('danger', 'Employee is deleted successfully');
     }
 }
