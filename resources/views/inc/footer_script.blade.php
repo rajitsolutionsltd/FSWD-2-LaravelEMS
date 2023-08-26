@@ -6,3 +6,8 @@
 <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
 
 <script src="{{asset('assets/js/app.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@include('inc.messages')
+
+<script src="{{asset('js/scripts.js')}}"></script>

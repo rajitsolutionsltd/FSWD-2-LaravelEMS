@@ -10,18 +10,6 @@
             </div>
             <div class="card-body">
 
-                @if(session()->get('success'))
-                    <p class="alert alert-success">{!!session()->get('success')!!}</p>
-                @endif
-
-                @if(session()->get('info'))
-                    <p class="alert alert-info">{!!session()->get('info')!!}</p>
-                @endif
-
-                @if(session()->get('danger'))
-                    <p class="alert alert-danger">{!!session()->get('danger')!!}</p>
-                @endif
-
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -45,13 +33,16 @@
                                     <td>
 
                                         <a href="{{url('employee/edit/'.$employee->id)}}" class="btn btn-info">Edit</a>
-                                        <a href="{{url('employee/delete/'.$employee->id)}}" class="btn btn-danger">Delete</a>
+                                        
+                                        <a href="{{url('employee/delete/'.$employee->id)}}" class="btn btn-danger" onclick="deleteItem(this)">Delete</a>
                                         
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    {!! $employees->links() !!}
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
     public function index(){
-        $employees = Employee::all();
+        $employees = Employee::paginate(2);
 
         return view('pages.employee.index', \compact('employees'));
     }
@@ -78,6 +78,6 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $employee->delete();
 
-        return redirect()->to('employee/index')->with('danger', 'Employee is deleted successfully');
+        return redirect()->to('employee/index')->with('warning', 'Employee is deleted successfully');
     }
 }
